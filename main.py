@@ -28,7 +28,7 @@ def node_generate_queries(state: ResearchState) -> ResearchState:
         ResearchState: El estado actualizado con las nuevas consultas y el contador de iteración.
     """
     simular_carga(3, "Iniciando motor de razonamiento")
-    print(f"\n\n===== [Paso 1] Generando Consultas Iniciales =====\n")
+    print(f"\n\n===== [node_generate_queries] =====\n")
     print(f"   - Tema de Investigación: '{state['topic']}'")
     
     # Simulación de LLM generando queries
@@ -52,7 +52,7 @@ def node_search_api(state: ResearchState) -> ResearchState:
         ResearchState: El estado actualizado con los resultados "crudos" de la búsqueda.
     """
     simular_carga(3, "Consultando bases de datos externas")
-    print(f"\n\n===== [Paso 2] Buscando en API Académica (Mock) =====\n")
+    print(f"\n\n===== [node_search_api] =====\n")
     print(f"   - Ejecutando Consultas: {state['queries']}")
     
     # Simulación de resultados. Devuelve pocos resultados en la primera iteración (count 0)
@@ -76,7 +76,7 @@ def node_evaluate_results(state: ResearchState) -> ResearchState:
         ResearchState: El estado actualizado con la bandera `is_sufficient` y el contador de iteración.
     """
     simular_carga(2, "Analizando relevancia")
-    print(f"\n\n===== [Paso 3] Evaluando Relevancia de Resultados =====\n")
+    print(f"\n\n===== [node_evaluate_results] =====\n")
     
     # Lógica simulada: Necesitamos al menos 3 papers buenos.
     # En iteración 0, tenemos 2 (fallará). En iteración 1, tenemos 4 (pasará).
@@ -103,7 +103,7 @@ def node_refine_search(state: ResearchState) -> ResearchState:
         ResearchState: El estado actualizado con las consultas de búsqueda refinadas.
     """
     simular_carga(2, "Ajustando parámetros de búsqueda")
-    print(f"\n\n===== [Paso 4] Refinando Estrategia de Búsqueda =====\n")
+    print(f"\n\n===== [node_refine_search] =====\n")
     
     # Simula hacer las queries más específicas
     new_queries = [q + " review" for q in state["queries"]]
@@ -121,7 +121,7 @@ def node_synthesize_report(state: ResearchState) -> ResearchState:
         ResearchState: El estado actualizado con el borrador del informe.
     """
     simular_carga(4, "Redactando informe final")
-    print(f"\n\n===== [Paso 5] Sintetizando Informe Preliminar =====\n")
+    print(f"\n\n===== [node_synthesize_report] =====\n")
     draft = f"INFORME SOBRE {state['topic'].upper()}\nBasado en {len(state['raw_results'])} papers clave, el campo muestra..."
     print("   - Borrador de Informe Generado.")
     return {"report_draft": draft}
@@ -138,7 +138,7 @@ def node_human_approval(state: ResearchState) -> ResearchState:
         ResearchState: El estado actualizado con la retroalimentación humana simulada ('approve').
     """
     simular_carga(1, "Preparando interfaz de revisión")
-    print(f"\n\n===== [Paso 6] Aprobación Humana (HUMAN-IN-THE-LOOP) =====\n")
+    print(f"\n\n===== [node_human_approval] =====\n")
     print(f"   - Mostrando borrador al usuario para revisión:\n\n{state['report_draft']}\n")
     
     # NOTA: En un sistema real, aquí usaríamos `interrupt` para pausar la ejecución.
